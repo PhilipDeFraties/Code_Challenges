@@ -5,4 +5,5 @@ def spoonerize(words)
     word[0] = first_chars[index]
   end
   array.join(" ")
+  # words.gsub(/(.)(.* )(.)(.*)/,'\3\2\1\4')
 end
