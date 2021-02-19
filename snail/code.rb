@@ -1,13 +1,15 @@
 def snail(input_array)
+  # creates clone of array so that original will be left untouched
+  array_clone = input_array.map(&:clone)
   new_array = []
-  until new_array.flatten.length == input_array.flatten.length
-    new_array << input_array.shift
-    input_array.each {|array| new_array << array.pop } unless input_array.empty?
-    new_array << input_array.pop.reverse unless input_array.empty?
-    if input_array.empty?
+  until new_array.flatten.length == array_clone.flatten.length
+    new_array << array_clone.shift
+    array_clone.each {|array| new_array << array.pop } unless array_clone.empty?
+    new_array << array_clone.pop.reverse unless array_clone.empty?
+    if array_clone.empty?
       break
     else
-      input_array.reverse.each do |array|
+      array_clone.reverse.each do |array|
         new_array << array.shift
       end
     end
