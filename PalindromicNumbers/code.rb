@@ -26,11 +26,10 @@
 #   return results
 # end
 
-def find_ints(min)
+def find_ints(start, min_palindrome, target_count)
   results = []
-  start = 0
-  until results.count == 25
-    check_pal(start, min, results)
+  until results.count == target_count
+    check_pal(start, min_palindrome, results)
     start += 1
   end
   return results
