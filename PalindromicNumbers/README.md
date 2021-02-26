@@ -19,3 +19,37 @@ Write out a few lines of initial pseudocode: (mid-level design, NOT REAL CODE) s
 add that number to its reverse, check if result is equal when reversed, if equal shovel into accumulator, if less than 1000, set start variable equal to +1 and call same method again.
 
 Write out any implementation code OR link to repl What is the Big O complexity of your solution?
+
+Failed attempts:
+
+```
+
+def find_pals(start, limit)
+  results = []
+  pal = start + (start.digits.join.to_i)
+  if pal < limit
+    if pal.digits == pal.digits.reverse
+      results << start
+    end
+    start += 1
+    find_pals(limit)
+  end
+  return results
+end
+
+def find_pals(limit)
+  results = []
+  start = 0
+  pal = 0
+  bind
+  until pal > limit
+    pal = start + (start.digits.join.to_i)
+    if pal.digits == pal.digits.reverse
+      results << start
+    end
+    start += 1
+  end
+  return results
+end
+
+```
