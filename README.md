@@ -1,1 +1,1 @@
-# Code_Challenges
+A collection of my code challenges, each challenge has its own readme containing instructions and any additional notes, a test file and a code file containing the solution. All challenges are in ruby unless specified as otherwise in the challenge's directory name such as reduce_but_grow_python.
