@@ -1,4 +1,4 @@
-def snail(input_array)
+def snail(array)
   # creates clone of array so that original will be left untouched
   array_clone = input_array.map(&:clone)
   new_array = []
@@ -11,6 +11,7 @@ def snail(input_array)
     else
       array_clone.reverse.each do |array|
         new_array << array.shift
+        binding.pry
       end
     end
   end
