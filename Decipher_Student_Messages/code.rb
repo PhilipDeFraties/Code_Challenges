@@ -27,6 +27,5 @@
 def decipher_message(message)
   return '' if message.empty?
   size = Math.sqrt(message.size).round
-  binding.pry
   message.chars.each_slice(size).to_a.transpose.map(&:join).join
 end
