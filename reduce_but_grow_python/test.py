@@ -18,3 +18,5 @@ class TestMethod(unittest.TestCase):
         self.assertEqual(result, 300)
         result = grow([10,10,10,10,10,10])
         self.assertEqual(result, 1000000)
+if __name__ == '__main__':
+    unittest.main()
