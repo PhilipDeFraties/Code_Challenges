@@ -1,3 +1,5 @@
+Easy LeetCode challenge
+
 Remove Element
 Easy
 
