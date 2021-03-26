@@ -6,3 +6,8 @@ Examples
 "1234"   -->  true
 "12345"  -->  false
 "a234"   -->  false
+
+Debugger:
+import pdb; pdb.set_trace()
+
+To run test file, from challenge directory run: $python test.py
