@@ -31,5 +31,5 @@ Your score is calculated as follows : (NxN - number of moves made to rescue the 
 
 Personal take:
 I really don't care for having the user put the size of grid and grid itself in, its clunky and
-redundant. I think it makes much more sense from a users perspective to input size select the
-corner in which the princess will be located then display the grid in the terminal.
+redundant. I think it makes much more sense from a users perspective to input size and select the
+corner in which the princess will be located then print the grid in the terminal.
