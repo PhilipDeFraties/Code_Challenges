@@ -138,6 +138,7 @@ class GridTest < Minitest::Test
   end
 
   def test_it_visulizes_layout
-
+    @grid.create_layout
+    assert_output("\"p--\"\n\"-b-\"\n\"---\"\n") { @grid.visualize_layout }
   end
 end
