@@ -18,4 +18,4 @@ grid.visualize_layout
 
 puts "To save the princess the robot takes the following steps:"
 bot = Bot.new(grid.layout)
-bot.path_to_princess
+bot.print_path_to_princess
