@@ -1,9 +1,10 @@
 require 'pry'
 class Grid
-  attr_accessor :size, :princess_placement
-  def initialize(size, princess_placement)
+  attr_reader :size, :placement, :layout
+  def initialize(size, placement)
     @size = size
-    @princess_placement = princess_placement
+    @placement = placement
+    @layout
   end
 
   def validate_size
@@ -13,20 +14,20 @@ class Grid
     end
   end
 
-  def validate_princess_placement
+  def validate_placement
     placement_options = ["TOP LEFT", "TOP RIGHT", "BOTTOM LEFT", "BOTTOM RIGHT"]
-    unless placement_options.include?(@princess_placement)
-      get_input_for_princess_placement
-      validate_princess_placement
+    unless placement_options.include?(@placement)
+      get_input_for_placement
+      validate_placement
     end
   end
 
 
-  def create_layout(size, princess_placement)
-    # create arrays, size x size grid of arrays
-    # empty spaces represented as "-"
-    # princess placement in one corner represented as "p"
-    # bot represented as "m" in center
+  def create_layout
+    # create grid, size x size arrays of "-"
+    @layout = Array.new(@size) { Array.new(@size) { "-" } }
+    place_princess(@layout)
+    place_bot(@layout)
   end
 
   def visualize_layout
@@ -40,9 +41,27 @@ class Grid
     @size = gets.to_i
   end
 
-  def get_input_for_princess_placement
+  def get_input_for_placement
     puts "choose which corner to place princess"
     puts "type one of the following: TOP LEFT, TOP RIGHT, BOTTOM LEFT, or BOTTOM RIGHT"
-    @princess_placement = gets.chomp
+    @placement = gets.chomp
+  end
+
+  def place_princess(grid)
+    if @placement == "TOP LEFT"
+      grid.first.first.replace("p")
+    elsif @placement == "TOP RIGHT"
+      grid.first.last.replace("p")
+    elsif @placement == "BOTTOM LEFT"
+      grid.last.first.replace("p")
+    elsif @placement == "BOTTOM RIGHT"
+      grid.last.last.replace("p")
+    end
+  end
+
+  def place_bot(grid)
+    # find middle, account for array index starting at 0
+    middle = ((@size + 1) / 2) - 1
+    grid[middle][middle].replace("b")
   end
 end
