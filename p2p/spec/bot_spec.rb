@@ -3,7 +3,7 @@ require_relative './lib/bot'
 require 'pry'
 class BotTest < Minitest::Test
   def test_it_exists
-
+    
   end
 
   def test_it_has_attrs
