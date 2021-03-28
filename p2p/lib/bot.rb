@@ -4,28 +4,26 @@ class Bot
     @grid = grid
   end
 
-  def find_path_to_princess
-    size = grid.count
-    if grid[0][0] == 'p'
-      ((size-1)/2).times do
-        puts 'UP'
-        puts 'LEFT'
-      end
-    elsif grid[size-1][0] == 'p'
-      ((size-1)/2).times do
-        puts 'DOWN'
-        puts 'LEFT'
-      end
-    elsif grid[0][size-1] == 'p'
-      ((size-1)/2).times do
-        puts 'UP'
-        puts 'RIGHT'
-      end
-    elsif grid[size-1][size-1] == 'p'
-      ((size-1)/2).times do
-        puts 'DOWN'
-        puts 'RIGHT'
-      end
+  def print_path_to_princess
+    directions = find_path_to_princess
+    ((grid.count-1)/2).times do
+        puts "#{directions[0]}\n#{directions[1]}\n"
     end
+  end
+
+  private
+
+  def find_path_to_princess
+    vertical = find_vertical_direction
+    lateral = find_lateral_direction
+    return [vertical, lateral]
+  end
+
+  def find_vertical_direction
+    grid[0].include?('p') ? 'UP' : 'DOWN'
+  end
+
+  def find_lateral_direction
+    grid.transpose.first.include?('p') ? 'LEFT' : 'RIGHT'
   end
 end
