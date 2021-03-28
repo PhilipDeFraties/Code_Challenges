@@ -15,6 +15,6 @@ class BotTest < Minitest::Test
   end
 
   def test_it_gives_path_to_princess
-    assert_output("UP\nLEFT\n") { @bot.find_path_to_princess }
+    assert_output("UP\nLEFT\n") { @bot.print_path_to_princess }
   end
 end
