@@ -2,14 +2,30 @@ class Bot
   attr_reader :grid
   def initialize(grid)
     @grid = grid
-    @path = []
   end
 
-  def save_princess
-    # move bot through grid to princess's position, record steps as strings in @path accumulator
-  end
-
-  def path_to_princess
-    # print out each step in @path accumulator to terminal 
+  def find_path_to_princess
+    size = grid.count
+    if grid[0][0] == 'p'
+      ((size-1)/2).times do
+        puts 'UP'
+        puts 'LEFT'
+      end
+    elsif grid[size-1][0] == 'p'
+      ((size-1)/2).times do
+        puts 'DOWN'
+        puts 'LEFT'
+      end
+    elsif grid[0][size-1] == 'p'
+      ((size-1)/2).times do
+        puts 'UP'
+        puts 'RIGHT'
+      end
+    elsif grid[size-1][size-1] == 'p'
+      ((size-1)/2).times do
+        puts 'DOWN'
+        puts 'RIGHT'
+      end
+    end
   end
 end
