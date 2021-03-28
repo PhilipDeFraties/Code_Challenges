@@ -21,7 +21,6 @@ class Grid
     end
   end
 
-
   def create_layout
     # create grid, size x size arrays of "-"
     @layout = Array.new(@size) { Array.new(@size) { "-" } }
