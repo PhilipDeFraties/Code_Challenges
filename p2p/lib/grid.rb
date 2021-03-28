@@ -32,6 +32,9 @@ class Grid
 
   def visualize_layout
     # print terminal-friendly display of @layout
+    @layout.each do |array|
+      p array.join
+    end
   end
 
   private
