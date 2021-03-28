@@ -14,9 +14,7 @@ class Bot
   private
 
   def find_path_to_princess
-    vertical = find_vertical_direction
-    lateral = find_lateral_direction
-    return [vertical, lateral]
+    [find_vertical_direction, find_lateral_direction]
   end
 
   def find_vertical_direction
