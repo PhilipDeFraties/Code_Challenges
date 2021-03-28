@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require './lib/grid'
 require 'pry'
 require 'mocha/minitest'
+
 class GridTest < Minitest::Test
   def setup
     @grid = Grid.new(3, "TOP LEFT")
@@ -19,7 +20,7 @@ class GridTest < Minitest::Test
   def test_it_exists_and_has_attrs
     assert_instance_of Grid, @grid
     assert_equal 3, @grid.size
-    assert_equal "TOP LEFT", @grid.princess_placement
+    assert_equal "TOP LEFT", @grid.placement
   end
 
   def test_it_validates_size_input
@@ -74,22 +75,22 @@ class GridTest < Minitest::Test
     end
   end
 
-  def test_it_validates_princess_placement
+  def test_it_validates_placement
     # each of the foor possible options works
-    @grid.validate_princess_placement
-    assert_equal "TOP LEFT", @grid.princess_placement
+    @grid.validate_placement
+    assert_equal "TOP LEFT", @grid.placement
 
     grid2 = Grid.new(5, "TOP RIGHT")
-    grid2.validate_princess_placement
-    assert_equal "TOP RIGHT", grid2.princess_placement
+    grid2.validate_placement
+    assert_equal "TOP RIGHT", grid2.placement
 
     grid3 = Grid.new(27, "BOTTOM LEFT")
-    grid3.validate_princess_placement
-    assert_equal "BOTTOM LEFT", grid3.princess_placement
+    grid3.validate_placement
+    assert_equal "BOTTOM LEFT", grid3.placement
 
     grid4 = Grid.new(99, "BOTTOM RIGHT")
-    grid4.validate_princess_placement
-    assert_equal "BOTTOM RIGHT", grid4.princess_placement
+    grid4.validate_placement
+    assert_equal "BOTTOM RIGHT", grid4.placement
 
     # responds with a message for new input for princess placement if not one of
     # the four options and rechecks
@@ -97,8 +98,46 @@ class GridTest < Minitest::Test
     grid5 = Grid.new(3, "TOP MIDDLE")
     with_stdin do |user|
       user.puts "TOP LEFT"
-      grid5.validate_princess_placement
-      assert_equal "TOP LEFT", grid5.princess_placement
+      grid5.validate_placement
+      assert_equal "TOP LEFT", grid5.placement
     end
+  end
+
+  def test_it_creates_layout
+    # it places princess in correct location with bot always in middle
+    @grid.create_layout
+    assert_equal [["p", "-", "-"], ["-", "b", "-"], ["-", "-", "-"]], @grid.layout
+
+    grid2 = Grid.new(3, "TOP RIGHT")
+    grid2.create_layout
+    assert_equal [["-", "-", "p"], ["-", "b", "-"], ["-", "-", "-"]], grid2.layout
+
+    grid3 = Grid.new(3, "BOTTOM LEFT")
+    grid3.create_layout
+    assert_equal [["-", "-", "-"], ["-", "b", "-"], ["p", "-", "-"]], grid3.layout
+
+    grid4 = Grid.new(3, "BOTTOM RIGHT")
+    grid4.create_layout
+    assert_equal [["-", "-", "-"], ["-", "b", "-"], ["-", "-", "p"]], grid4.layout
+
+    # it works with any size between 3 and 99
+    grid5 = Grid.new(5, "TOP LEFT")
+    grid5.create_layout
+    assert_equal [["p", "-", "-", "-", "-"],
+                  ["-", "-", "-", "-", "-"],
+                  ["-", "-", "b", "-", "-"],
+                  ["-", "-", "-", "-", "-"],
+                  ["-", "-", "-", "-", "-"]], grid5.layout
+
+    grid6 = Grid.new(99, "TOP RIGHT")
+    grid6.create_layout
+    assert_equal 99, grid6.layout.count
+    assert_equal "p", grid6.layout.first.last
+    middle = ((grid6.size + 1) / 2) - 1
+    assert_equal "b", grid6.layout[middle][middle]
+  end
+
+  def test_it_visulizes_layout
+
   end
 end
