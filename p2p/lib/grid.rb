@@ -1,4 +1,3 @@
-require 'pry'
 class Grid
   attr_reader :size, :placement, :layout
   def initialize(size, placement)
