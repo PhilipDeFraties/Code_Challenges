@@ -1,24 +1,24 @@
 class Grid
   attr_reader :size, :placement, :layout
+  PLACEMENT_OPTIONS = ["TOP LEFT", "TOP RIGHT", "BOTTOM LEFT", "BOTTOM RIGHT"]
   def initialize(size, placement)
     @size = size
     @placement = placement
-    @layout
+    @layout = nil
   end
 
   def validate_size
-    unless size.class == Integer && size.odd? == true && size.between?(3,99)
-      get_input_for_size
-      validate_size
-    end
+    return if size.class == Integer && size.odd? && size.between?(3,99)
+
+    get_input_for_size
+    validate_size
   end
 
   def validate_placement
-    placement_options = ["TOP LEFT", "TOP RIGHT", "BOTTOM LEFT", "BOTTOM RIGHT"]
-    unless placement_options.include?(@placement)
-      get_input_for_placement
-      validate_placement
-    end
+    return if Grid::PLACEMENT_OPTIONS.include?(@placement)
+    
+    get_input_for_placement
+    validate_placement
   end
 
   def create_layout
@@ -49,14 +49,17 @@ class Grid
   end
 
   def place_princess(grid)
-    if @placement == "TOP LEFT"
+    case @placement
+    when "TOP LEFT"
       grid.first.first.replace("p")
-    elsif @placement == "TOP RIGHT"
+    when "TOP RIGHT"
       grid.first.last.replace("p")
-    elsif @placement == "BOTTOM LEFT"
+    when "BOTTOM LEFT"
       grid.last.first.replace("p")
-    elsif @placement == "BOTTOM RIGHT"
+    when "BOTTOM RIGHT"
       grid.last.last.replace("p")
+    else
+      "raise an error here for invalid input"
     end
   end
 
